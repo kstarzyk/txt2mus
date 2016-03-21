@@ -1,0 +1,16 @@
+{
+  "name": "note-player",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prep": "rm -f .tmp/* && node index.js",
+    "watch": "nodemon --harmony_destructuring"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.9.1"
+  }
+}
