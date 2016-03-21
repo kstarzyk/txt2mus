@@ -1,5 +1,5 @@
 TEMPO = .0125
-INSTRUMENT = Klarnet
+INSTRUMENT =Klarnet
 g1 0.25
 e1 0.25 l
 e1 0.25
