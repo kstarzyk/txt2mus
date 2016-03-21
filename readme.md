@@ -4,10 +4,10 @@
 **txt2mus** is a little node.js package which combined with powerful **sox**, awesome **ES6**, old (but good) **bash** creates .wav files from .json__
 ### Dependencies
 Use **txt2mus** you will need UNIX-likely OS and **sox**:
-- Linux &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+- Linux &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
    ```$ apt-get install sox
    ```
-- MacOS &nbsp;&nbsp;&nbsp;&nbsp;
+ &nbsp;&nbsp;&nbsp;MacOS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 ```$ brew install sox
 ```
 
