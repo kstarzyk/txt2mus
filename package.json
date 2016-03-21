@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prep": "rm -f .tmp/* && node index.js",
-    "watch": "nodemon --harmony_destructuring"
+    "watch": "nodemon --harmony_destructuring",
+    "test:xunit": "npm run test -- --reporter xunit"
   },
   "author": "",
   "license": "ISC",

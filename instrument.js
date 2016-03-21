@@ -9,11 +9,12 @@ const CREATED_PATH = 'created';
 const OCTAVE = ['c', 'c#', 'd', 'd#', 'e', 'f', 'f#', 'g', 'g#', 'a', 'a#', 'h'];
 const HALF_TONE = 100;
 
-function get_notes_from_dir(dirname) {
+function get_notes_from_dir(dirname, areCreated) {
+  areCreated = areCreated || false;
   return fs.readdirSync(dirname).filter((elem, ind) => {
     return elem.indexOf('.wav') > -1;
   }).map(x => {
-    return Instrument.getNoteInfo(x);
+    return Instrument.getNoteInfo(x, areCreated);
   });
 }
 
@@ -26,6 +27,7 @@ function sort_notes(notes) {
 function mkdir(dirname) {
   return fs.mkdirSync(dirname);
 }
+
 
 function print_notes(notes) {
   console.log(notes.map(x => `${x.id}: ${x.name}`).join('\n'));
@@ -44,26 +46,36 @@ class Instrument {
   init() {
     this.notes = get_notes_from_dir(this.path);
     if (get_notes_from_dir(`${this.path}/${CREATED_PATH}`)) {
-      const created = get_notes_from_dir(`${this.path}/${CREATED_PATH}`);
+      const created = get_notes_from_dir(`${this.path}/${CREATED_PATH}`, true);
       this.notes = this.notes.concat(created);
       this.isClear = false;
     }
 
     console.log(`${this.name} initialized`);
     this.notes = sort_notes(this.notes);
-    print_notes(this.notes);
-
-
+    // print_notes(this.notes);
   }
 
-  get(note) {
-    if (in_array(note, notes, name)) {
-      return `note.wav`;
+  getFullPath(note) {
+    const res = Instrument.getNoteInfo(note);
+    const find = this.getNote(res.id);
+    if (find && !find.created) {
+        return `${this.path.substring(2)}/${res.full}`;
+    } else if(find && find.created) {
+      return `${this.path.substring(2)}/${CREATED_PATH}/${res.full}`;
     } else {
+      console.log(`${note} Doesn't exist in samples. Need to be created!`);
       return this.create(note).full;
     }
   }
 
+  getNote(id) {
+    for (let i=0; i < this.notes.length; i++ )
+      if (this.notes[i].id == id)
+        return this.notes[i];
+
+    return false;
+  }
 
   static getOctave(note) {
     const base = note.replace('#', '').replace('b', '').replace('.wav', '');
@@ -77,7 +89,8 @@ class Instrument {
     }
   }
 
-  static getNoteInfo(note) {
+  static getNoteInfo(note, _created) {
+    const created = _created || false;
     const octave = Instrument.getOctave(note);
     let base = '';
     if (note.indexOf('#') > -1 || note.indexOf('b') > -1 ) {
@@ -87,7 +100,7 @@ class Instrument {
     }
     const name = note.replace('.wav', '');
     const full = note.indexOf('.wav') > -1 ? note : `${name}.wav`;
-    return {base: base.toLowerCase(), octave: octave, id: (octave+2)*12 + OCTAVE.indexOf(base.toLowerCase()), full: full, name: name};
+    return {base: base.toLowerCase(), octave: octave, id: (octave+2)*12 + OCTAVE.indexOf(base.toLowerCase()), full: full, name: name, created: created };
   }
 
   create(note) {
@@ -108,25 +121,31 @@ class Instrument {
     console.info("CMD: ", cmd);
     cp.execSync(cmd);
     this.init();
+    return this.getNote(hay.id);
   }
 
   // @getNoteInfo
   findClosest(name) {
     const lookup = Instrument.getNoteInfo(name);
-    const sorted = this.notes.sort((a) => { return lookup.id - a.id; });
-    return sorted[0];
+    let min_diff = 99999, id = -1;
+    // const sorted = this.notes.sort((a,b) => a.id - lookup.id);
+    for (let i = 0; i < this.notes.length; i++) {
+      if (Math.abs(this.notes[i].id - lookup.id) < min_diff) {
+        min_diff = Math.abs(this.notes[i].id - lookup.id);
+        id = this.notes[i].id;
+      }
+    }
+    const res = this.getNote(id);
+    console.log(`  Closest candidate ${res.name}`);
+    return res;
   }
 
   // @getNoteInfo
   static pitch_dist(FIRST, SECOND) {
     const oct_dist = (SECOND.octave - FIRST.octave) * 12 * HALF_TONE;
-    return (( OCTAVE.indexOf(SECOND.base) - OCTAVE.indexOf(FIRST.base) ) * HALF_TONE) + oct_dist;
+    return -(( OCTAVE.indexOf(SECOND.base) - OCTAVE.indexOf(FIRST.base) ) * HALF_TONE) + oct_dist;
   }
 }
 
-// let cos = new Instrument('Klarnet');
-// cos.init();
-// cos.create('d#1');
 
-
-module.exports = new Instrument('Klarnet');
+module.exports = Instrument;

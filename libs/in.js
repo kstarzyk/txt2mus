@@ -1,7 +1,7 @@
 "use strict";
 
 function comp_atom_to_object(a, b, by) {
-  return a == object.by;
+  return a == b.by;
 }
 
 function comp_atom_to_atom(a, b, by) {
