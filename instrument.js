@@ -1,7 +1,7 @@
 "use strict";
 const fs = require("fs");
 const cp = require("child_process");
-const in_array = require('./in.js');
+const in_array = require('./libs/in.js');
 
 const SAMPLES_PATH = 'samples';
 const CREATED_PATH = 'created';
