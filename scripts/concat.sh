@@ -28,7 +28,7 @@ do
   audios="$audios $entry"
 done
 
-if [ $tracks=1 ]; then
+if [ "$tracks" -eq 1 ]; then
   sox $audios examples/$name.wav
 else
   sox -m $audios examples/$name.wav
