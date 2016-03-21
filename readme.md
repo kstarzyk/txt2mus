@@ -1,7 +1,7 @@
 # txt2mus [under development]
 
 ### About
-**txt2mus** is a little node.js package which combined with powerful **sox**, awesome **ES6**, old (but good) **bash** creates .wav files from .json__
+   **txt2mus** is a little node.js package which combined with powerful **sox**, awesome **ES6**, old (but good) **bash** creates .wav files from <s>.json</s> .snc files (check examples/).
 ### Dependencies
 Use **txt2mus** you will need UNIX-likely OS and **sox**:
 - Linux &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
