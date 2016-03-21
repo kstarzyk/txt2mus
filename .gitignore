@@ -1,3 +1,5 @@
 decorator.js
+samples/**/created/*
+examples/**/*.wav
 node_modules/*
-.tmp
+.tmp/*

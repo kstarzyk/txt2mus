@@ -1,0 +1,7 @@
+TEMPO = .0125
+INSTRUMENT = Guitar
+chord | c d# g a# | 1
+chord | c d# g a# | 1
+chord | f a c d# | 1
+chord | d d f a | 1
+chord | d d f a | 1
