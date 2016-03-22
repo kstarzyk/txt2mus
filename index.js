@@ -52,7 +52,7 @@ function line2sox(note, it, instrument) {
     // console.log(cmd);
     return cmd;
   }
-  const time = note.art == 'l' ? 0.05 : 0.0;
+  const time = note.art == 'l' ? 0.15 : 0.0;
   return `sox ${instrument.getFullPath(note.snd)} ${TMP}/${it}.wav trim ${0.0 + time } ${note.duration * options.BMP_FACTOR + time} && `;
 }
 let melody = [];

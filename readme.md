@@ -1,13 +1,13 @@
 # txt2mus [under development]
 
 ### About
-   **txt2mus** is a little node.js package which combined with powerful **sox**, awesome **ES6**, old (but good) **bash** creates .wav files from <s>.json</s> .snc files (check examples/).
+**txt2mus** is a little node.js package which combined with powerful **sox**, awesome **ES6**, old (but good) **bash** creates .wav files from <del>.json</del> .snc file (see examples/).
 ### Dependencies
-Use **txt2mus** you will need UNIX-likely OS and **sox**:
-- Linux &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+For use **txt2mus** you will need UNIX-likely OS and **sox**:
+- Linux &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
    ```$ apt-get install sox
    ```
- &nbsp;&nbsp;&nbsp;MacOS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+- MacOS &nbsp;&nbsp;&nbsp;&nbsp;
 ```$ brew install sox
 ```
 
@@ -26,6 +26,11 @@ The result (as one .wav file) will be created in examples/<name_of_dir_in_exampl
 
 ### Features
 - Interpolates note from existing samples if note in .snc doesn't exist
+- Multitracking
 
+### TODO
+- Better input file format (maybe .json?)  
+- Remove **sox** from dependencies (maybe...)
+- Silence end of sounds
 ### Documentation
 (writing documentation is pointless at *now*)

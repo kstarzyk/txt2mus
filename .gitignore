@@ -1,5 +1,5 @@
 decorator.js
-samples/**/created/*
+samples/**/created/ 
 examples/**/*.wav
 node_modules/*
 .tmp/*
